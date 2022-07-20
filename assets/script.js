@@ -54,6 +54,17 @@ var characterAmount = function() {
   }
 };
 
+var shuffle = function(string) {
+  var arr = string.split('');
+
+  arr.sort(function() {
+    return 0.5 - Math.random();
+  });
+
+  string = arr.join('');
+  return string;
+}
+
 var randomize = function(length) {
   passwordOptions = []
   password = ""
@@ -67,7 +78,7 @@ var randomize = function(length) {
   }
 
   available.length = 0
-  return password;
+  return shuffle(password);
 };
 
 
