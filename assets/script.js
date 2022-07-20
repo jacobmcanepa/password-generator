@@ -5,7 +5,6 @@ var numbers = "0123456789"
 var special = "!#$&%;()'*+-/:<>=?@^_`{|}.~"
 var available = [];
 
-// generate password function
 var generatePassword = function() {
   var includeUppercase = window.confirm("Would you like to include uppercase characters in your password?");
 
@@ -41,12 +40,12 @@ var characterAmount = function() {
   
   if (parseInt(value) < 8) {
     alert("Your password must be more than 8 characters.");
-    characterAmount();
+    return characterAmount();
   }
 
   if (parseInt(value) > 128) {
     alert("Your password must be less than 128 characters.");
-    characterAmount();
+    return characterAmount();
   }
 
   else {
