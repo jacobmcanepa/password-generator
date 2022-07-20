@@ -3,36 +3,37 @@ var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 var lowercase = "abcdefghijklmnopqrstuvwxyz"
 var numbers = "0123456789"
 var special = "!#$&%;()'*+-/:<>=?@^_`{|}.~"
-var available = "";
+var available = [];
 
 // generate password function
 var generatePassword = function() {
   var includeUppercase = window.confirm("Would you like to include uppercase characters in your password?");
 
   if (includeUppercase) {
-    available += uppercase;
+    available.push(uppercase);
   }
 
   var includeLowercase = window.confirm("Would you like to include lowercase characters in your password?");
 
   if (includeLowercase) {
-    available += lowercase;
+    available.push(lowercase);
   }
 
   var includeNumbers = window.confirm("Would you like to include numbers in your password?");
 
   if (includeNumbers) {
-    available += numbers;
+    available.push(numbers);
   }
 
   var includeSpecial = window.confirm("Would you like to include special characters in your password?");
 
   if (includeSpecial) {
-    available += special;
+    available.push(special);
   }
 
   finalPassword = randomize(characterAmount());
   return finalPassword;
+
 };
 
 var characterAmount = function() {
@@ -54,11 +55,18 @@ var characterAmount = function() {
 };
 
 var randomize = function(length) {
-  var password = "";
+  passwordOptions = []
+  password = ""
   for (var i = 0; i < length; i++) {
-    password += available.charAt(Math.floor(Math.random() * available.length));
+    passwordOptions.push(available[i % available.length]);
   }
 
+  for (var i = 0; i < passwordOptions.length; i++) {
+    var index = Math.floor(Math.random() * passwordOptions[i].length);
+    password += passwordOptions[i][index];
+  }
+
+  available.length = 0
   return password;
 };
 
